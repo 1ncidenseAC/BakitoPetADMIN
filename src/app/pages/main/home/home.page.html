@@ -1,0 +1,40 @@
+<app-header [showMenu]="true" title="Inicio"></app-header>
+<ion-content>
+  <ion-list>
+    <ion-item-sliding class="product-item" *ngFor="let p of products">
+      <ion-item>
+
+        <!-- ! No puedo utilizar imagenes ya que en Firebase el apartado de 'Storage' el cual sirve para subir las fotos es de pago -->
+
+        <!-- <ion-avatar>
+          <img [src]="p.image" />
+        </ion-avatar> -->
+
+        <ion-label>
+          <div class="name">{{p.name}}</div>
+          <div class="data">
+            <strong> Precio: </strong>${{p.price}}
+            <br>
+            <strong> Cantidad vendida: </strong>{{p.soldUnits}}
+          </div>
+          <ion-chip color="success" mode="ios" outline="true">
+            <ion-label>Ganancias: ${{p.price*p.soldUnits}}</ion-label>
+          </ion-chip>
+        </ion-label>
+      </ion-item>
+      <ion-item-options color="success">
+        <ion-item-option (click)="addUpdateProduct(p)" style="color: white;" color="success">
+          <ion-icon class="option-btn" name="create"></ion-icon>
+        </ion-item-option>
+        <ion-item-option (click)="confirmDeleteProduct(p)" color="danger">
+          <ion-icon class="option-btn" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addUpdateProduct()">
+      <ion-icon name="bag-add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
